@@ -40,7 +40,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install just
-        run: uv tool install just
+        run: uv tool install rust-just
 
       - name: Run mypy
         run: just mypy
@@ -63,7 +63,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install just
-        run: uv tool install just
+        run: uv tool install rust-just
 
       - name: Run tests
         run: just test
@@ -96,7 +96,7 @@ jobs:
           merge-multiple: true
 
       - name: Install just
-        run: uv tool install just
+        run: uv tool install rust-just
 
       - name: Combine and report
         run: |

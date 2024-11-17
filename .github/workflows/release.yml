@@ -33,7 +33,7 @@ jobs:
           python-version-file: "pyproject.toml"
 
       - name: Install just
-        run: uv tool install just
+        run: uv tool install rust-just
 
       - name: Build package
         id: build
