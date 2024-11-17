@@ -1,6 +1,10 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 # Cancel concurent in-progress jobs or run on pull_request
 concurrency:
@@ -39,11 +43,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install just
-        run: uv tool install rust-just
-
       - name: Run mypy
-        run: just mypy
+        run: uv run --only-group mypy -- mypy
 
   tests:
     name: Tests ${{ matrix.python-version }}
@@ -62,11 +63,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install just
-        run: uv tool install rust-just
-
       - name: Run tests
-        run: just test
+        run: uv run --group testcov -- coverage run --parallel-mode -m pytest
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
@@ -95,13 +93,9 @@ jobs:
           pattern: coverage-data-*
           merge-multiple: true
 
-      - name: Install just
-        run: uv tool install rust-just
-
       - name: Combine and report
         run: |
           uv run --only-group coverage -- coverage combine
-          # Report to console
-          jsut report
-          # Report to summary
-          just report --format=markdown >> $GITHUB_STEP_SUMMARY
+          uv run --only-group coverage -- coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
+          # report to console
+          uv run --only-group coverage -- coverage report

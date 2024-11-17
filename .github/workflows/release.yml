@@ -12,7 +12,6 @@ env:
   REPO_OWNER: tahv
 
 jobs:
-
   # Build package on every commit on main
   build:
     name: Build package
@@ -24,30 +23,26 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v3
-        # with:
-          # version: TODO
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: "pyproject.toml"
 
-      - name: Install just
-        run: uv tool install rust-just
-
       - name: Build package
         id: build
         run: |
-          just build
-          echo "version=$(just version)" | tee -a "$GITHUB_OUTPUT"
+          uv build --no-sources
+          uv run --only-group build -- check-wheel-contents dist/*.whl
+          echo "version=$(uv run --only-group build -- python -m setuptools_scm)" | tee -a $GITHUB_OUTPUT
 
       - name: Print package contents summary
         run: |
           echo -e '<details open><summary>sdist contents</summary>\n' >> $GITHUB_STEP_SUMMARY
-          just whl-contents | sed 's/^/    /' | tee -a $GITHUB_STEP_SUMMARY
+          tar -tf dist/*.tar.gz | tree -a --fromfile . | sed 's/^/    /' | tee -a $GITHUB_STEP_SUMMARY
           echo -e '</details>\n' >> $GITHUB_STEP_SUMMARY
           echo -e '<details open><summary>wheel contents</summary>\n' >> $GITHUB_STEP_SUMMARY
-          just sdist-contents | sed 's/^/    /' | tee -a $GITHUB_STEP_SUMMARY
+          unzip -Z1 dist/*.whl | tree -a --fromfile . | sed 's/^/    /' | tee -a $GITHUB_STEP_SUMMARY
           echo -e '</details>\n' >> $GITHUB_STEP_SUMMARY
 
       - uses: actions/upload-artifact@v4
