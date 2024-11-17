@@ -79,9 +79,12 @@ pydocstyle.convention = "google"
 isort.required-imports = ["from __future__ import annotations"]
 ignore = [
   "D100",   # Missing docstring in public module
+  "D102",   # Missing docstring in public method
+  "D103",   # Missing docstring in public function
   "D104",   # Missing docstring in public package
   "D107",   # Missing docstring in `__init__`
   "FIX002", # Line contains TODO, consider resolving the issue
+  "N802",   # Function name should be lowercase
   "TD002",  # Missing author in TODO
   "TD003",  # Missing issue link on the line following this TODO
 ]

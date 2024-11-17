@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pytest
 from markdown import markdown
 
@@ -77,4 +79,3 @@ def test_merge_request(
     configs.update(config_kwargs)
     output = markdown(source, extensions=[GitlabLinks(**configs)])
     assert output == expected
-

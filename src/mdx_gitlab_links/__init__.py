@@ -37,7 +37,7 @@ def _build_link(label: str, title: str, href: str, classes: str) -> Element:
 # TODO: commit range
 
 
-class MergeRequestPattern(Pattern):
+class MergeRequestPattern(Pattern):  # noqa: D101
     # TODO: mr title (#123+)
     # TODO: mr summary (#123+s)
 
@@ -68,7 +68,7 @@ class GitlabLinks(Extension):
     https://docs.gitlab.com/ee/user/markdown.html#gitlab-specific-references
     """
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs: Any) -> None:  # noqa: ANN401
         self.config = {
             "domain": [
                 "https://gitlab.com",
@@ -87,5 +87,5 @@ class GitlabLinks(Extension):
         )
 
 
-def makeExtension(**kwargs: Any) -> GitlabLinks:
+def makeExtension(**kwargs: Any) -> GitlabLinks:  # noqa: ANN401
     return GitlabLinks(**kwargs)
