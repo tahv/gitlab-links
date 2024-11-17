@@ -4,7 +4,7 @@ description = "An extension to Python-Markdown which adds support for GitLab-spe
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "Thibaud Gambier" }]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dynamic = ["version"]
 dependencies = ["markdown>=3.7"]
 keywords = ["markdown", "python-markdown", "gitlab"]
@@ -14,7 +14,6 @@ classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
