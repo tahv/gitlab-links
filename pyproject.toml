@@ -75,7 +75,7 @@ branch = true
 parallel = true
 
 [tool.coverage.paths]
-pyflare = [
+mdx_gitlab_links = [
   "src/mdx_gitlab_links",
   "*/src/mdx_gitlab_links",
   "*\\src\\mdx_gitlab_links",
